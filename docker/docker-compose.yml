@@ -1,0 +1,39 @@
+services:
+  mysql:
+    image: mysql:8.0.33
+    ports:
+      - 13306:3306 # 13306은 호스트의 포트번호, 컨테이너의 포트번호
+    volumes: # 호스트와 컨테이너의 싱크 맞추기(복사) 설정을 도와주는 디렉토리
+      - C:/Users/hjy02/IdeaProjects/kafka-payment/src/main/resources/initdb:/docker-entrypoint-initdb.d # window는 c부터 시작하고 /로 설정해야함
+    command:
+      - '--character-set-server=utf8mb4' #
+      - '--collation-server=utf8mb4_unicode_ci' # 서버에 유니코드 설정
+      - '--lower_case_table_names=1' # 대소문자 구분하지 않겠다
+    environment:
+      MYSQL_ROOT_PASSWORD: testbed
+      MYSQL_DATABASE: service-labs
+  zookeeper: # Kafka와 같은 분산 메시징 시스템에서 사용 노드 간의 상태를 관리
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+        ZOOKEEPER_SERVER_ID: 1
+        ZOOKEEPER_CLIENT_PORT: 2181
+        ZOOKEEPER_TICK_TIME: 2000
+        ZOOKEEPER_INIT_LIMIT: 5
+        ZOOKEEPER_SYNC_LIMIT: 2
+    ports:
+        - "22181:2181"
+  kafka:
+    image: confluentinc/cp-schema-registry:latest
+    depends_on: # 주키퍼가 실행되지 않으면 카프카도 실행하지 않겠다
+        - zookeeper
+    ports:
+      - "9092:19092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-1:19092,EXTERNAL://localhost:19094
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_LISTENERS: INTERNAL://kafka-1:19092,EXTERNAL://kafka-1:19094
+
