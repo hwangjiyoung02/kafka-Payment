@@ -1,4 +1,4 @@
-package com.jiyoung.kafkaPayment.platform.representation.request.payment;
+package com.jiyoung.kafkaPayment.platform.representation.request.payment.response;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
