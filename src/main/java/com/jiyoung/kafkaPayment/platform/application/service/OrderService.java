@@ -3,7 +3,7 @@ package com.jiyoung.kafkaPayment.platform.application.service;
 import com.jiyoung.kafkaPayment.platform.application.port.in.CreateNewOrderUseCase;
 import com.jiyoung.kafkaPayment.platform.application.port.in.GetOrderInfoUseCase;
 import com.jiyoung.kafkaPayment.platform.domain.order.Order;
-import com.jiyoung.kafkaPayment.platform.infrasturcture.out.jpa.OrderRepository;
+import com.jiyoung.kafkaPayment.platform.infrasturcture.repository.OrderRepository;
 import com.jiyoung.kafkaPayment.platform.representation.request.order.PurchaseOrder;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -22,12 +22,15 @@ public class OrderService implements CreateNewOrderUseCase,GetOrderInfoUseCase {
     @Transactional
     @Override
     public Order createOrder(PurchaseOrder newOrder) throws Exception {
-        return null;
+        // purchaseOrder에서 Order 도메인과 OrdeItem으로 변환하는 코드
+        // orderRepository에서 저장하는 코드
+       return orderRepository.save(newOrder.toEntity());
+
     }
 
     @Transactional
     @Override
     public Order getOrderInfo(UUID orderId) {
-        return null;
+        return orderRepository.findById(orderId);
     }
 }

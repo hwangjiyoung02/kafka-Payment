@@ -1,8 +1,9 @@
-package com.jiyoung.kafkaPayment.platform.infrasturcture.out.jpa;
+package com.jiyoung.kafkaPayment.platform.infrasturcture.repository;
 
+import com.jiyoung.kafkaPayment.platform.application.port.out.repository.OrderPort;
 import com.jiyoung.kafkaPayment.platform.domain.order.Order;
+import com.jiyoung.kafkaPayment.platform.infrasturcture.out.jpa.JpaOrderRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.NoSuchElementException;
@@ -15,7 +16,7 @@ import java.util.UUID;
  * */
 @Repository
 @RequiredArgsConstructor
-public class OrderRepository {
+public class OrderRepository implements OrderPort {
 
     private final JpaOrderRepository jpaOrderRepository; //생성자 주입을 통해 초기화
     

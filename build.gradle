@@ -56,7 +56,7 @@ dependencies {
 	// Kafka Client
 	implementation("org.springframework.kafka:spring-kafka")
 	implementation("org.apache.avro:avro:1.11.3")
-	implementation("io.confluent:kafka-avro-serializer:7.0.1")
+//	implementation("io.confluent:kafka-avro-serializer:7.0.1")
 }
 
 
