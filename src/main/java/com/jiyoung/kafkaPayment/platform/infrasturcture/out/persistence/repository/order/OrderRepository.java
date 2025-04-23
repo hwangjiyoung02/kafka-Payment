@@ -1,8 +1,7 @@
-package com.jiyoung.kafkaPayment.platform.infrasturcture.repository;
+package com.jiyoung.kafkaPayment.platform.infrasturcture.out.persistence.repository.order;
 
 import com.jiyoung.kafkaPayment.platform.application.port.out.repository.OrderPort;
 import com.jiyoung.kafkaPayment.platform.domain.order.Order;
-import com.jiyoung.kafkaPayment.platform.infrasturcture.out.jpa.JpaOrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
