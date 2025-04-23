@@ -38,6 +38,7 @@ public class Order {
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> items = new ArrayList<>();
+
     protected Order() {
     }
 
@@ -74,10 +75,9 @@ public class Order {
             .forEach(item -> item.update(OrderStatus.ORDER_CANCELLED));
     }
 
-    public static boolean verifyHaveAtLeastOneItem() {
-//        if(!items.isEmpty()||items!=null)
-        return true;
-//        else throw new IllegalArgumentException();
+    public static boolean verifyHaveAtLeastOneItem(List<OrderItem> items) {
+        if(!items.isEmpty()||items!=null) return true;
+        else throw new IllegalArgumentException();
     }
 
     public boolean  verifyDuplicateOrderItemId() {

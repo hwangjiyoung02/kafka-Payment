@@ -1,6 +1,6 @@
 services:
   mysql:
-    image: mysql:8.0.33
+    image: mysql:8.0.41
     ports:
       - 13306:3306 # 13306은 호스트의 포트번호, 컨테이너의 포트번호
     volumes: # 호스트와 컨테이너의 싱크 맞추기(복사) 설정을 도와주는 디렉토리

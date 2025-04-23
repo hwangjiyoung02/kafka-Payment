@@ -24,8 +24,8 @@ public class OrderService implements CreateNewOrderUseCase,GetOrderInfoUseCase {
     public Order createOrder(PurchaseOrder newOrder) throws Exception {
         Order order = newOrder.toEntity();
         order.calculateTotalAmount();
-        Order.verifyHaveAtLeastOneItem();
-        order.verifyDuplicateOrderItemId();
+//        Order.verifyHaveAtLeastOneItem();
+//        order.verifyDuplicateOrderItemId();
         // purchaseOrder에서 Order 도메인과 OrdeItem으로 변환하는 코드
         // orderRepository에서 저장하는 코드
        return orderRepository.save(newOrder.toEntity());

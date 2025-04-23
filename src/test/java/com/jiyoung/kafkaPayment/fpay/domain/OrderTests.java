@@ -39,7 +39,7 @@ public class OrderTests {
                 ));
 
         Order order = newOrder.toEntity();
-        Assertions.assertFalse(order.verifyHaveAtLeastOneItem());
+        Assertions.assertFalse(order.verifyHaveAtLeastOneItem(order.getItems()));
 
     }
 
@@ -53,7 +53,7 @@ public class OrderTests {
         );
 
         Order order = newOrder.toEntity();
-        Assertions.assertTrue(order.verifyHaveAtLeastOneItem());
+        Assertions.assertTrue(order.verifyHaveAtLeastOneItem(order.getItems()));
     }
 
     /**

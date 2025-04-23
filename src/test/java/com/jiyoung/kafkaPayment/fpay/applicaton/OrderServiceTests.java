@@ -27,7 +27,6 @@ public class OrderServiceTests {
     /*
     * 목객체를 mockito(객체는 정의하지만 빈값임)를 사용해서 일련의 비지니스로직을 적용하고 잘되는지 테스트
     * 영속성은 상관하지 않고 Order를 return하는지 확인
-
     * */
 
     /*
