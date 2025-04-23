@@ -2,6 +2,8 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.4'
 	id 'io.spring.dependency-management' version '1.1.4'
+	id 'org.asciidoctor.jvm.convert' version '3.3.2'
+
 	// Spring REST Docs 의 결과물을 OpenAPI 3 스펙으로 변환
 	id 'com.epages.restdocs-api-spec' version '0.17.1'
 	// OpenAPI 3 Spec을 기반으로 SwaggerUI 생성(HTML, CSS, JS)
@@ -9,6 +11,7 @@ plugins {
 	// AVRO
 	id 'com.github.davidmc24.gradle.plugin.avro' version '1.9.1'
 }
+
 
 group = 'com.jiyoung'
 version = '0.0.1-SNAPSHOT'
@@ -62,4 +65,35 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+//tasks.withType<com.github.davidmc24.gradle.plugin.avro.GenerateAvroJavaTask> {
+//	fieldVisibility = "PRIVATE"
+//	setCreateSetters("false")
+//	setSource("src/main/avro")
+//	setOutputDir(file("build/generated-sources"))
+//}
+
+
+//tasks.withType<Test> {
+//	useJUnitPlatform()
+//}
+
+openapi3 {
+	setServer('https://localhost:9080')  // ✅ 올바른 위치
+	title = 'Kafka Payment API'
+	description = 'API documentation for Kafka Payment System'
+	version = '1.0.0'
+	format = 'json'
+}
+
+//tasks.register<Copy>("copyOasToSwagger") {
+//	delete("src/main/resources/static/swagger-ui/openapi3.yaml") // 기존 yaml 파일 삭제
+//	from("$buildDir/api-spec/openapi3.yaml") // 복제할 yaml 파일 타겟팅
+//	into("src/main/resources/static/swagger-ui/.") // 타겟 디렉토리로 파일 복제
+//	dependsOn("openapi3") // openapi3 task가 먼저 실행되도록 설정
+//}
+
+tasks.compileJava {
+	dependsOn(tasks.generateTestAvroJava)
 }

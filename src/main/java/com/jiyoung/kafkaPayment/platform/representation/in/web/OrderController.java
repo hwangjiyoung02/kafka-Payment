@@ -23,6 +23,7 @@ public class OrderController {
     @PostMapping("/new")
     public NewPurchaseOrder newOrder(@RequestBody @Valid PurchaseOrder newOrder) throws Exception{
         // 도메인을 -> dto로 변환하는 건 from
+        // Usecase interface를 의존해서 호출(DIP)
         return NewPurchaseOrder.from(createNewOrderUseCase.createOrder(newOrder));
     }
 
